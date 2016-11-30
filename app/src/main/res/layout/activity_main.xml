@@ -8,6 +8,7 @@
     tools:context="com.eminem.weibo.MainActivity">
 
     <FrameLayout
+        android:id="@+id/fl_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
@@ -19,6 +20,7 @@
 
 
     <RadioGroup
+        android:id="@+id/rg"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_gravity="bottom"
@@ -48,13 +50,13 @@
 
 
         <RadioButton
-            android:id="@+id/rb_discover"
+            android:id="@+id/rb_serach"
             style="@style/RadioButtonBottomTab"
             android:drawableTop="@drawable/icon_discover"
             android:text="发现" />
 
         <RadioButton
-            android:id="@+id/rb_my"
+            android:id="@+id/rb_user"
             style="@style/RadioButtonBottomTab"
             android:drawableTop="@drawable/icon_my"
             android:text="我的" />
