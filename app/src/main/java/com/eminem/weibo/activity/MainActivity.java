@@ -1,4 +1,4 @@
-package com.eminem.weibo;
+package com.eminem.weibo.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.eminem.weibo.R;
 import com.eminem.weibo.fragment.FragmentController;
 
 import butterknife.Bind;
