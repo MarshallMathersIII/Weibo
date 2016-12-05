@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
 import com.eminem.weibo.constants.CommonConstants;
@@ -16,7 +17,7 @@ import com.eminem.weibo.utils.ToastUtils;
  * Created by Eminem on 2016/11/30.
  */
 
-public class BaseActivity extends Activity {
+public class BaseActivity extends FragmentActivity {
     protected String TAG;
     protected BaseApplication application;
     protected SharedPreferences sp;

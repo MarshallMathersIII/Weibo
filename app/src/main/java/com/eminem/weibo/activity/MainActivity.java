@@ -1,7 +1,6 @@
 package com.eminem.weibo.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -9,6 +8,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.eminem.weibo.BaseActivity;
 import com.eminem.weibo.R;
 import com.eminem.weibo.fragment.FragmentController;
 
@@ -16,7 +16,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @Bind(R.id.fl_content)
     FrameLayout flContent;
