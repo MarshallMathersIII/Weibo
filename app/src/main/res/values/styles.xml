@@ -24,7 +24,14 @@
         <item name="android:button">@null</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@drawable/txtcolor_gray2org_sel</item>
-
+    </style>
+    <!--标题栏 style-->
+    <style name="TextViewTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/txt_black</item>
+        <item name="android:textSize">@dimen/txtsize_title</item>
     </style>
 
 </resources>
