@@ -10,6 +10,7 @@ import com.eminem.weibo.R;
 
 /**
  * Created by Eminem on 2016/11/30.
+ * builder模式构建可复用titlebar
  */
 
 public class TitleBuilder {
