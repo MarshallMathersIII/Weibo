@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "com.eminem.weibo"
         minSdkVersion 19
@@ -28,4 +28,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.infstory:weibo-android-sdk:3.1.4'
     compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.orhanobut:logger:1.8'
 }
