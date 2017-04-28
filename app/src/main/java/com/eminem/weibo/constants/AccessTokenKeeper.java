@@ -8,6 +8,7 @@ import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 
 /**
  * Created by Eminem on 2016/12/5.
+ *
  */
 
 public class AccessTokenKeeper {
