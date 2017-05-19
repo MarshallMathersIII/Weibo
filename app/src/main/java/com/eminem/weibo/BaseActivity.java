@@ -15,6 +15,7 @@ import com.eminem.weibo.utils.ToastUtils;
 
 /**
  * Created by Eminem on 2016/11/30.
+ *
  */
 
 public class BaseActivity extends FragmentActivity {

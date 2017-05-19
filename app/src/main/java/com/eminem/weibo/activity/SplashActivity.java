@@ -1,5 +1,7 @@
 package com.eminem.weibo.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -38,6 +40,16 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        Intent i_getvalue = getIntent();
+        String action = i_getvalue.getAction();
+
+        if(Intent.ACTION_VIEW.equals(action)){
+            Uri uri = i_getvalue.getData();
+            if(uri != null){
+                String name = uri.getQueryParameter("name");
+                String age= uri.getQueryParameter("age");
+            }
+        }
         accessToken = AccessTokenKeeper.readAccessToken(this);
         if (accessToken.isSessionValid()) {
             handler.sendEmptyMessageDelayed(WHAT_INTENT2MAIN, SPLASH_DUR_TIME);

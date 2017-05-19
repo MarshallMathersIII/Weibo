@@ -12,25 +12,26 @@ import com.eminem.weibo.BaseActivity;
 import com.eminem.weibo.R;
 import com.eminem.weibo.fragment.FragmentController;
 
-import butterknife.Bind;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
 
-    @Bind(R.id.fl_content)
+    @BindView(R.id.fl_content)
     FrameLayout flContent;
-    @Bind(R.id.rb_home)
+    @BindView(R.id.rb_home)
     RadioButton rbHome;
-    @Bind(R.id.rb_message)
+    @BindView(R.id.rb_message)
     RadioButton rbMessage;
-    @Bind(R.id.iv_add)
+    @BindView(R.id.iv_add)
     ImageView ivAdd;
-    @Bind(R.id.rb_serach)
+    @BindView(R.id.rb_serach)
     RadioButton rbSerach;
-    @Bind(R.id.rb_user)
+    @BindView(R.id.rb_user)
     RadioButton rbUser;
-    @Bind(R.id.rg)
+    @BindView(R.id.rg)
     RadioGroup rg;
 
 

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:id="@+id/ll_card_content"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/iv_head"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <RelativeLayout
+        android:id="@+id/rl_content"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tv_head_name"
+            style="@style/TextViewSubhead"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/tv_head_desc"
+            style="@style/TextViewCaption"
+            android:layout_alignParentBottom="true"
+            android:maxLines="1"
+            android:textColor="@color/txt_gray" />
+    </RelativeLayout>
+
+</LinearLayout>
