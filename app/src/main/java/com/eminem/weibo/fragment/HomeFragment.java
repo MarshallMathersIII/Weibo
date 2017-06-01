@@ -2,20 +2,20 @@ package com.eminem.weibo.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
+import com.aspsine.swipetoloadlayout.OnRefreshListener;
+import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.eminem.weibo.BaseFragment;
 import com.eminem.weibo.R;
 import com.eminem.weibo.adapter.StatusAdapter;
 import com.eminem.weibo.api.AsyncHttpUtils;
+import com.eminem.weibo.bean.Status;
 import com.eminem.weibo.bean.StatusTimeLineResponse;
 import com.eminem.weibo.constants.AccessTokenKeeper;
 import com.eminem.weibo.utils.TitleBuilder;
@@ -26,10 +26,11 @@ import com.loopj.android.http.TextHttpResponseHandler;
 import com.orhanobut.logger.Logger;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
-
-import butterknife.BindView;
 
 /**
  * Created by Eminem on 2016/11/30.
@@ -37,34 +38,26 @@ import butterknife.BindView;
  */
 
 public class HomeFragment extends BaseFragment {
-    @BindView(R.id.titlebar_iv_left)
-    ImageView titlebarIvLeft;
-    @BindView(R.id.titlebar_tv_left)
-    TextView titlebarTvLeft;
-    @BindView(R.id.titlebar_tv)
-    TextView titlebarTv;
-    @BindView(R.id.titlebar_iv_right)
-    ImageView titlebarIvRight;
-    @BindView(R.id.titlebar_tv_right)
-    TextView titlebarTvRight;
-    @BindView(R.id.rl_titlebar)
-    RelativeLayout rlTitlebar;
-    @BindView(R.id.lv_home)
-    ListView lvHome;
-
+    private SwipeToLoadLayout swipeToLoadLayout;
+    private ListView lvHome;
     private View view;
+    private StatusAdapter adapter;
+    private List<Status> statuses = new ArrayList<>();
+    private int curPage = 1;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         initView();
-        initData();
+        initData(1);
         ButterKnife.bind(this, view);
         return view;
     }
 
     private void initView() {
         view = View.inflate(activity, R.layout.frag_home, null);
+        swipeToLoadLayout = (SwipeToLoadLayout) view.findViewById(R.id.swipeToLoadLayout);
+        lvHome = (ListView) view.findViewById(R.id.swipe_target);
         new TitleBuilder(view)
                 .setTitleText("首页")
                 .setLeftText("LEFT")
@@ -74,14 +67,34 @@ public class HomeFragment extends BaseFragment {
                         ToastUtils.showToast(activity, "left onclick", Toast.LENGTH_SHORT);
                     }
                 });
+
+
+        adapter = new StatusAdapter(activity, statuses);
+        lvHome.setAdapter(adapter);
+        swipeToLoadLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initData(1);
+                swipeToLoadLayout.setRefreshing(false);
+
+            }
+        });
+
+        swipeToLoadLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                initData(curPage + 1);
+                swipeToLoadLayout.setLoadingMore(false);
+            }
+        });
+
     }
 
-    private void initData() {
+    private void initData(final int page) {
         Oauth2AccessToken mAccessToken = AccessTokenKeeper.readAccessToken(activity);
         String token = mAccessToken.getToken();
-//      long uid = Long.parseLong(mAccessToken.getUid());
         RequestParams params = new RequestParams();
-//      params.put("uid",uid);
+        params.put("page", page);
         params.put("access_token", token);
         AsyncHttpUtils.get("statuses/home_timeline.json", params, new TextHttpResponseHandler() {
             @Override
@@ -91,13 +104,30 @@ public class HomeFragment extends BaseFragment {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-//                Toast.makeText(activity, responseString, Toast.LENGTH_LONG).show();
-                Log.d("eminem",responseString);
                 Logger.json(responseString);
                 StatusTimeLineResponse timeLineResponse = new Gson().fromJson(responseString, StatusTimeLineResponse.class);
-                lvHome.setAdapter(new StatusAdapter(activity, timeLineResponse.getStatuses()));
+//              lvHome.setAdapter(new StatusAdapter(activity, timeLineResponse.getStatuses()));
+
+                if (page == 1) {
+                    statuses.clear();
+                }
+                curPage = page;
+//              lvHome.setAdapter(new StatusAdapter(activity, timeLineResponse.getStatuses()));
+                addStatus(new Gson().fromJson(responseString, StatusTimeLineResponse.class));
+
             }
         });
+    }
+
+
+    private void addStatus(StatusTimeLineResponse resBean) {
+        for (Status status : resBean.getStatuses()) {
+            if (!statuses.contains(status)) {
+                statuses.add(status);
+            }
+        }
+        adapter.notifyDataSetChanged();
+
     }
 
 

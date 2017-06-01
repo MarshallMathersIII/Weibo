@@ -6,10 +6,29 @@
 
     <include layout="@layout/include_titlebar" />
 
-    <ListView
-        android:id="@+id/lv_home"
+    <com.aspsine.swipetoloadlayout.SwipeToLoadLayout
+        android:id="@+id/swipeToLoadLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.eminem.weibo.widget.RefreshHeaderView
+            android:id="@id/swipe_refresh_header"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center" />
+
+        <ListView
+            android:id="@+id/swipe_target"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.eminem.weibo.widget.LoadMoreFooterView
+            android:id="@id/swipe_load_more_footer"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center" />
+    </com.aspsine.swipetoloadlayout.SwipeToLoadLayout>
 
 
 </LinearLayout>

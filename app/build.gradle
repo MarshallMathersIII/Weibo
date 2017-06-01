@@ -19,6 +19,7 @@ android {
     }
 }
 
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -36,6 +37,10 @@ dependencies {
     compile 'com.android.support:support-v4:25.2.0'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.squareup.okio:okio:1.5.0'
+    compile 'com.github.Aspsine:SwipeToLoadLayout:1.0.4'
+
+
+
 
 
 }
