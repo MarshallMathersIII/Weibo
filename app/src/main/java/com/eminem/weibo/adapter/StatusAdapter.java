@@ -1,6 +1,8 @@
 package com.eminem.weibo.adapter;
 
 import android.content.Context;
+import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -16,6 +18,7 @@ import com.eminem.weibo.R;
 import com.eminem.weibo.bean.PicUrls;
 import com.eminem.weibo.bean.Status;
 import com.eminem.weibo.bean.User;
+import com.eminem.weibo.utils.DateUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +26,6 @@ import java.util.List;
 /**
  * Created by eminem on 2017/4/28.
  * 微博首页adapter
- *
  */
 
 public class StatusAdapter extends BaseAdapter {
@@ -93,8 +95,11 @@ public class StatusAdapter extends BaseAdapter {
         final User user = status.getUser();
         Glide.with(context).load(user.getProfile_image_url()).into(holder.iv_head);
         holder.tv_head_name.setText(user.getName());
-        holder.tv_head_desc.setText(status.getCreated_at() + " 来自 " +status.getSource());
-
+        if (status.getSource().isEmpty()) {
+            holder.tv_head_desc.setText(DateUtils.getShortTime(status.getCreated_at()));
+        } else {
+            holder.tv_head_desc.setText(DateUtils.getShortTime(status.getCreated_at()) + " 来自 " + Html.fromHtml(status.getSource()));
+        }
         //微博正文
         holder.tv_content.setText(status.getText());
         setImages(status, holder.include_status_image, holder.gv_images, holder.iv_image);
@@ -142,34 +147,34 @@ public class StatusAdapter extends BaseAdapter {
     }
 
 
-     static class ViewHolder {
-         LinearLayout ll_card_content;
-         ImageView iv_head;
-         RelativeLayout rl_content;
-         TextView tv_head_name;
-         TextView tv_head_desc;
+    static class ViewHolder {
+        LinearLayout ll_card_content;
+        ImageView iv_head;
+        RelativeLayout rl_content;
+        TextView tv_head_name;
+        TextView tv_head_desc;
 
-         TextView tv_content;
+        TextView tv_content;
 
-         FrameLayout include_status_image;
-         GridView gv_images;
-         ImageView iv_image;
+        FrameLayout include_status_image;
+        GridView gv_images;
+        ImageView iv_image;
 
-         LinearLayout include_retweeted_status;
-         TextView tv_retweeted_content;
-         FrameLayout include_retweeted_status_image;
-         GridView gv_retweeted_images;
-         ImageView iv_retweeted_image;
+        LinearLayout include_retweeted_status;
+        TextView tv_retweeted_content;
+        FrameLayout include_retweeted_status_image;
+        GridView gv_retweeted_images;
+        ImageView iv_retweeted_image;
 
-         LinearLayout ll_share_bottom;
-         ImageView iv_share_bottom;
-         TextView tv_share_bottom;
-         LinearLayout ll_comment_bottom;
-         ImageView iv_comment_bottom;
-         TextView tv_comment_bottom;
-         LinearLayout ll_like_bottom;
-         ImageView iv_like_bottom;
-         TextView tv_like_bottom;
+        LinearLayout ll_share_bottom;
+        ImageView iv_share_bottom;
+        TextView tv_share_bottom;
+        LinearLayout ll_comment_bottom;
+        ImageView iv_comment_bottom;
+        TextView tv_comment_bottom;
+        LinearLayout ll_like_bottom;
+        ImageView iv_like_bottom;
+        TextView tv_like_bottom;
     }
 
 
