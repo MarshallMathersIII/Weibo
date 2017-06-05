@@ -2,7 +2,6 @@ package com.eminem.weibo.adapter;
 
 import android.content.Context;
 import android.text.Html;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -19,6 +18,7 @@ import com.eminem.weibo.bean.PicUrls;
 import com.eminem.weibo.bean.Status;
 import com.eminem.weibo.bean.User;
 import com.eminem.weibo.utils.DateUtils;
+import com.eminem.weibo.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,7 +101,7 @@ public class StatusAdapter extends BaseAdapter {
             holder.tv_head_desc.setText(DateUtils.getShortTime(status.getCreated_at()) + " 来自 " + Html.fromHtml(status.getSource()));
         }
         //微博正文
-        holder.tv_content.setText(status.getText());
+        holder.tv_content.setText(StringUtils.getWeiboContent(context, holder.tv_content, status.getText()));
         setImages(status, holder.include_status_image, holder.gv_images, holder.iv_image);
 
         //转发内容
@@ -110,7 +110,7 @@ public class StatusAdapter extends BaseAdapter {
             User retUser = retweeted_status.getUser();
             holder.include_retweeted_status.setVisibility(View.VISIBLE);
             String retweetedContent = "@" + retUser.getName() + ":" + retweeted_status.getText();
-            holder.tv_retweeted_content.setText(retweetedContent);
+            holder.tv_retweeted_content.setText(StringUtils.getWeiboContent(context, holder.tv_retweeted_content, retweetedContent));
             setImages(retweeted_status, holder.include_retweeted_status_image, holder.gv_retweeted_images, holder.iv_retweeted_image);
         } else {
             holder.include_retweeted_status.setVisibility(View.GONE);
