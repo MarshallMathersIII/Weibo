@@ -7,6 +7,7 @@ import android.text.SpannableString;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -60,6 +61,14 @@ public class StatusDetailActivity extends AppCompatActivity {
     private FrameLayout fl_retweeted_imageview;
     private GridView gv_retweeted_images;
     private ImageView iv_retweeted_image;
+
+
+    // shadow_tab - 顶部悬浮的菜单栏
+    private View shadow_status_detail_tab;
+    private RadioGroup shadow_rg_status_detail;
+    private RadioButton shadow_rb_retweets;
+    private RadioButton shadow_rb_comments;
+    private RadioButton shadow_rb_likes;
 
     private View status_detail_tab;
     private RadioGroup rg_status_detail;
@@ -136,6 +145,13 @@ public class StatusDetailActivity extends AppCompatActivity {
     }
 
     private void initTab() {
+        // shadow
+        shadow_status_detail_tab = findViewById(R.id.status_detail_tab);
+        shadow_rg_status_detail = (RadioGroup) shadow_status_detail_tab.findViewById(R.id.rg_status_detail);
+        shadow_rb_retweets = (RadioButton) shadow_status_detail_tab.findViewById(R.id.rb_retweets);
+        shadow_rb_comments = (RadioButton) shadow_status_detail_tab.findViewById(R.id.rb_comments);
+        shadow_rb_likes = (RadioButton) shadow_status_detail_tab.findViewById(R.id.rb_likes);
+
         status_detail_tab = View.inflate(this, R.layout.status_detial_tab, null);
         rg_status_detail = (RadioGroup) status_detail_tab.findViewById(R.id.rg_status_detail);
         rb_retweets = (RadioButton) status_detail_tab.findViewById(R.id.rb_retweets);
@@ -167,6 +183,19 @@ public class StatusDetailActivity extends AppCompatActivity {
                 swipeToLoadLayout.setLoadingMore(false);
             }
         });
+
+        lv_status_detail.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                shadow_status_detail_tab.setVisibility(firstVisibleItem >= 2 ? View.VISIBLE : View.GONE);
+            }
+        });
+
 
     }
 

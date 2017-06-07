@@ -9,30 +9,41 @@
     <include layout="@layout/include_titlebar" />
 
 
-    <com.aspsine.swipetoloadlayout.SwipeToLoadLayout
-        android:id="@+id/swipeToLoadLayout"
+    <RelativeLayout
+        android:id="@+id/rl_body"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_gravity="center"
         android:layout_weight="1">
 
-        <com.eminem.weibo.widget.RefreshHeaderView
-            android:id="@id/swipe_refresh_header"
+        <com.aspsine.swipetoloadlayout.SwipeToLoadLayout
+            android:id="@+id/swipeToLoadLayout"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:gravity="center" />
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
 
-        <ListView
-            android:id="@+id/swipe_target"
-            style="@style/ListViewCommon"
-            android:dividerHeight="8dp" />
+            <com.eminem.weibo.widget.RefreshHeaderView
+                android:id="@id/swipe_refresh_header"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="center" />
 
-        <com.eminem.weibo.widget.LoadMoreFooterView
-            android:id="@id/swipe_load_more_footer"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:gravity="center" />
-    </com.aspsine.swipetoloadlayout.SwipeToLoadLayout>
+            <ListView
+                android:id="@+id/swipe_target"
+                style="@style/ListViewCommon"
+                android:dividerHeight="8dp" />
+
+            <com.eminem.weibo.widget.LoadMoreFooterView
+                android:id="@id/swipe_load_more_footer"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="center" />
+        </com.aspsine.swipetoloadlayout.SwipeToLoadLayout>
+
+        <include
+            android:id="@+id/status_detail_tab"
+            layout="@layout/status_detial_tab"
+            android:visibility="gone" />
+    </RelativeLayout>
 
     <include
         android:id="@+id/status_detail_controlbar"
