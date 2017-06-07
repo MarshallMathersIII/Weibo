@@ -1,6 +1,7 @@
 package com.eminem.weibo.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +12,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.eminem.weibo.R;
+import com.eminem.weibo.activity.StatusDetailActivity;
+import com.eminem.weibo.activity.WriteCommentActivity;
 import com.eminem.weibo.bean.PicUrls;
 import com.eminem.weibo.bean.Status;
 import com.eminem.weibo.bean.User;
 import com.eminem.weibo.utils.DateUtils;
 import com.eminem.weibo.utils.StringUtils;
+import com.eminem.weibo.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,9 +123,36 @@ public class StatusAdapter extends BaseAdapter {
 
         //转发评论点赞
         holder.tv_share_bottom.setText(status.getReposts_count() == 0 ? "转发" : status.getReposts_count() + "");
-        holder.tv_comment_bottom.setText(status.getComments_count() == 0 ? "评论" : status.getComments_count() + "");
+        holder.ll_share_bottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.showToast(context,"转发", Toast.LENGTH_LONG);
+            }
+        });
         holder.tv_like_bottom.setText(status.getAttitudes_count() == 0 ? "赞" : status.getAttitudes_count() + "");
+        holder.ll_like_bottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.showToast(context,"点赞", Toast.LENGTH_LONG);
+            }
+        });
+        holder.tv_comment_bottom.setText(status.getComments_count() == 0 ? "评论" : status.getComments_count() + "");
+        holder.ll_comment_bottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.showToast(context,"评论", Toast.LENGTH_LONG);
+                if (status.getComments_count()>0){
+                    Intent intent = new Intent(context, StatusDetailActivity.class);
+                    intent.putExtra("status",status);
+                    context.startActivity(intent);
+                }else {
+                    Intent intent = new Intent(context, WriteCommentActivity.class);
+                    intent.putExtra("status",status);
+                    context.startActivity(intent);
+                }
 
+            }
+        });
         return convertView;
     }
 
