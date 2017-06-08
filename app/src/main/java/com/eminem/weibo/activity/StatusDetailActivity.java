@@ -1,7 +1,7 @@
 package com.eminem.weibo.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -16,15 +16,16 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.bumptech.glide.Glide;
+import com.eminem.weibo.BaseActivity;
 import com.eminem.weibo.R;
 import com.eminem.weibo.adapter.StatusCommentAdapter;
 import com.eminem.weibo.adapter.StatusGridImgsAdapter;
-import com.eminem.weibo.api.AsyncHttpUtils;
 import com.eminem.weibo.bean.Comment;
 import com.eminem.weibo.bean.CommentsResponse;
 import com.eminem.weibo.bean.PicUrls;
@@ -32,9 +33,11 @@ import com.eminem.weibo.bean.Status;
 import com.eminem.weibo.bean.User;
 import com.eminem.weibo.constants.AccessTokenKeeper;
 import com.eminem.weibo.constants.WeiboConstants;
+import com.eminem.weibo.utils.AsyncHttpUtils;
 import com.eminem.weibo.utils.DateUtils;
 import com.eminem.weibo.utils.StringUtils;
 import com.eminem.weibo.utils.TitleBuilder;
+import com.eminem.weibo.utils.ToastUtils;
 import com.eminem.weibo.widget.WrapHeightGridView;
 import com.google.gson.Gson;
 import com.loopj.android.http.RequestParams;
@@ -47,7 +50,7 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
-public class StatusDetailActivity extends AppCompatActivity {
+public class StatusDetailActivity extends BaseActivity implements View.OnClickListener {
     private View status_detail_info;
     private ImageView iv_head;
     private TextView tv_head_name;
@@ -209,6 +212,9 @@ public class StatusDetailActivity extends AppCompatActivity {
         tv_like_bottom = (TextView) ll_bottom_control.findViewById(R.id.tv_weibo_bottom_like);
         ll_bottom_control.setBackgroundResource(R.color.white);
 
+        ll_share_bottom.setOnClickListener(this);
+        ll_comment_bottom.setOnClickListener(this);
+        ll_like_bottom.setOnClickListener(this);
 
     }
 
@@ -314,5 +320,22 @@ public class StatusDetailActivity extends AppCompatActivity {
         }
         // 添加完后,通知ListView刷新页面数据
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.ll_comment_bottom:
+                Intent intent = new Intent(StatusDetailActivity.this, WriteCommentActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.ll_like_bottom:
+                ToastUtils.showToast(StatusDetailActivity.this,"点赞api未开放", Toast.LENGTH_SHORT);
+                break;
+            case R.id.ll_share_bottom:
+                ToastUtils.showToast(StatusDetailActivity.this,"转发", Toast.LENGTH_SHORT);
+                break;
+        }
+
     }
 }

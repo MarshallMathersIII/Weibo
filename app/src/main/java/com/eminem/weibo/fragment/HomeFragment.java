@@ -14,7 +14,7 @@ import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.eminem.weibo.BaseFragment;
 import com.eminem.weibo.R;
 import com.eminem.weibo.adapter.StatusAdapter;
-import com.eminem.weibo.api.AsyncHttpUtils;
+import com.eminem.weibo.utils.AsyncHttpUtils;
 import com.eminem.weibo.bean.Status;
 import com.eminem.weibo.bean.StatusTimeLineResponse;
 import com.eminem.weibo.constants.AccessTokenKeeper;

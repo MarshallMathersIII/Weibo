@@ -1,4 +1,4 @@
-package com.eminem.weibo.api;
+package com.eminem.weibo.utils;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
