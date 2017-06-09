@@ -34,6 +34,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cz.msebera.android.httpclient.Header;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
  * Created by Eminem on 2016/11/30.
@@ -151,7 +152,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         // set data
         tv_subhead.setText(user.getName());
         tv_caption.setText("简介:" + user.getDescription());
-        Glide.with(activity).load(user.getAvatar_large()).into(iv_avatar);
+        Glide.with(activity).load(user.getAvatar_hd()).bitmapTransform(new CropCircleTransformation(activity)).into(iv_avatar);
         tv_status_count.setText("" + user.getStatuses_count());
         tv_follow_count.setText("" + user.getFriends_count());
         tv_fans_count.setText("" + user.getFollowers_count());

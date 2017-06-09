@@ -20,6 +20,8 @@ import com.eminem.weibo.utils.ToastUtils;
 
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
+
 /**
  * Created by eminem on 2017/6/6.
  */
@@ -66,7 +68,7 @@ public class StatusCommentAdapter extends BaseAdapter {
         }
         Comment comment = (Comment) getItem(position);
         final User user = comment.getUser();
-        Glide.with(context).load(user.getProfile_image_url()).into(holder.iv_head);
+        Glide.with(context).load(user.getAvatar_hd()).bitmapTransform(new CropCircleTransformation(context)).into(holder.iv_head);
         holder.tv_head_name.setText(user.getName());
         holder.tv_head_desc.setText(DateUtils.getShortTime(comment.getCreated_at()));
         SpannableString weiboContent = StringUtils.getWeiboContent(context, holder.tv_comment, comment.getText());

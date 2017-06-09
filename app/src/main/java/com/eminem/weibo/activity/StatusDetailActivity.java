@@ -49,6 +49,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 public class StatusDetailActivity extends BaseActivity implements View.OnClickListener {
     private View status_detail_info;
@@ -220,7 +221,7 @@ public class StatusDetailActivity extends BaseActivity implements View.OnClickLi
 
     private void initData() {
         User user = status.getUser();
-        Glide.with(this).load(user.getProfile_image_url()).into(iv_head);
+        Glide.with(this).load(user.getAvatar_hd()).bitmapTransform(new CropCircleTransformation(this)).into(iv_head);
         tv_head_name.setText(user.getName());
         tv_head_desc.setText(DateUtils.getShortTime(status.getCreated_at()) + " 来自" + Html.fromHtml(status.getSource()));
 

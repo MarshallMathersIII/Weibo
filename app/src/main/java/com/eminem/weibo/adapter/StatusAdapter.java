@@ -28,6 +28,8 @@ import com.eminem.weibo.utils.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
+
 /**
  * Created by eminem on 2017/4/28.
  * 微博首页adapter
@@ -98,7 +100,7 @@ public class StatusAdapter extends BaseAdapter {
         //微博用户
         final Status status = (Status) getItem(position);
         final User user = status.getUser();
-        Glide.with(context).load(user.getProfile_image_url()).into(holder.iv_head);
+        Glide.with(context).load(user.getAvatar_hd()).bitmapTransform(new CropCircleTransformation(context)).into(holder.iv_head);
         holder.tv_head_name.setText(user.getName());
         if (status.getSource().isEmpty()) {
             holder.tv_head_desc.setText(DateUtils.getShortTime(status.getCreated_at()));
