@@ -201,6 +201,8 @@ public class StatusDetailActivity extends BaseActivity implements View.OnClickLi
         });
 
 
+
+
     }
 
     private void initBottomBar() {

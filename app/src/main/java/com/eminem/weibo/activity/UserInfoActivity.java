@@ -5,6 +5,7 @@ import android.support.annotation.IdRes;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -65,7 +66,7 @@ public class UserInfoActivity extends BaseActivity implements RadioGroup.OnCheck
     private String screenName;
     // 个人微博列表
     private List<Status> statuses = new ArrayList<>();
-//    private StatusAdapter statusAdapter;
+    //    private StatusAdapter statusAdapter;
     private int curPage = 1;
     // 背景图片最小高度
     private int minImageHeight = -1;
@@ -90,15 +91,14 @@ public class UserInfoActivity extends BaseActivity implements RadioGroup.OnCheck
     }
 
     private void initView() {
-        new TitleBuilder(this)
+        title = new TitleBuilder(this)
                 .setTitleText("我的")
                 .setLeftImage(R.drawable.navigationbar_back)
-                .setLeftOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                .build();
 
-                    }
-                });
+        // 获取标题栏信息,需要时进行修改
+        titlebar_iv_left = (ImageView) title.findViewById(R.id.titlebar_iv_left);
+        titlebar_tv = (TextView) title.findViewById(R.id.titlebar_tv);
 
         initInfoHead();
         initTab();
@@ -160,6 +160,48 @@ public class UserInfoActivity extends BaseActivity implements RadioGroup.OnCheck
             }
         });
 
+
+        iv_user_info_head.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom,
+                                       int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                if (curScrollY == bottom - oldBottom) {
+                    iv_user_info_head.layout(0, 0,
+                            iv_user_info_head.getWidth(),
+                            oldBottom);
+                }
+            }
+        });
+
+        lv_user_info.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+                iv_user_info_head.layout(0,
+                        user_info_head.getTop(),
+                        iv_user_info_head.getWidth(),
+                        user_info_head.getTop() + iv_user_info_head.getHeight());
+
+                if (user_info_head.getBottom() < title.getBottom()) {
+                    shadow_user_info_tab.setVisibility(View.VISIBLE);
+                    title.setBackgroundResource(R.drawable.navigationbar_background);
+                    titlebar_iv_left.setImageResource(R.drawable.navigationbar_back_sel);
+                    titlebar_tv.setVisibility(View.VISIBLE);
+                } else {
+                    shadow_user_info_tab.setVisibility(View.GONE);
+                    title.setBackgroundResource(R.drawable.userinfo_navigationbar_background);
+                    titlebar_iv_left.setImageResource(R.drawable.userinfo_navigationbar_back_sel);
+                    titlebar_tv.setVisibility(View.GONE);
+                }
+
+            }
+        });
     }
 
 
@@ -243,7 +285,7 @@ public class UserInfoActivity extends BaseActivity implements RadioGroup.OnCheck
     private void addStatus(StatusTimeLineResponse statusTimeLineResponse) {
         for (Status status : statusTimeLineResponse.getStatuses()) {
             if (!statuses.contains(status)) {
-               statuses.add(status);
+                statuses.add(status);
             }
         }
         adapter.notifyDataSetChanged();
