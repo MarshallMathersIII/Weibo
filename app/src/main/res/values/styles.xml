@@ -93,4 +93,9 @@
         <item name="android:gravity">center</item>
     </style>
 
+
+    <style name="RadioButtonUserInfoTab" parent="RadioButtonStatusDetailTab">
+        <item name="android:background">@color/white</item>
+    </style>
+
 </resources>

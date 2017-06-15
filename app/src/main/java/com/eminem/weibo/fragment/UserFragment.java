@@ -1,5 +1,6 @@
 package com.eminem.weibo.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -15,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.eminem.weibo.BaseApplication;
 import com.eminem.weibo.BaseFragment;
 import com.eminem.weibo.R;
+import com.eminem.weibo.activity.UserInfoActivity;
 import com.eminem.weibo.adapter.UserItemAdapter;
 import com.eminem.weibo.bean.User;
 import com.eminem.weibo.bean.UserItem;
@@ -156,6 +158,16 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         tv_status_count.setText("" + user.getStatuses_count());
         tv_follow_count.setText("" + user.getFriends_count());
         tv_fans_count.setText("" + user.getFollowers_count());
+
+        iv_avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String screen_name = user.getScreen_name();
+                Intent intent = new Intent(activity, UserInfoActivity.class);
+                intent.putExtra("screen_name",screen_name);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

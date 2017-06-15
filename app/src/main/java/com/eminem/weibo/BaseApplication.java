@@ -9,11 +9,11 @@ import com.eminem.weibo.bean.User;
  */
 
 public class BaseApplication extends Application {
+    public User currentUser;
+
     @Override
     public void onCreate() {
         super.onCreate();
     }
-
-    public User currentUser;
 
 }
