@@ -28,7 +28,7 @@ public class SplashActivity extends BaseActivity {
                     finish();
                     break;
                 case WHAT_INTENT2LOGIN:
-                    intent2Activity(LoginActivity.class);
+                    intent2Activity(UnLoginActivity.class);
                     finish();
                     break;
             }

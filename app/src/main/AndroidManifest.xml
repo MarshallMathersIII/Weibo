@@ -36,7 +36,10 @@
         </activity>
         <activity android:name=".activity.WriteCommentActivity" />
         <activity android:name=".activity.StatusDetailActivity" />
-        <activity android:name=".activity.UserInfoActivity"></activity>
+        <activity android:name=".activity.UserInfoActivity" />
+        <activity android:name=".activity.NewUserInfoActivity" />
+        <activity android:name=".activity.MagicLoginActivity" />
+        <activity android:name=".activity.UnLoginActivity"></activity>
     </application>
 
 </manifest>
