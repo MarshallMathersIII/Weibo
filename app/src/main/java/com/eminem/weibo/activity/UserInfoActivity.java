@@ -1,7 +1,10 @@
 package com.eminem.weibo.activity;
 
+import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -38,6 +41,7 @@ import cz.msebera.android.httpclient.Header;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 public class UserInfoActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
+    public static final String TAG="UserInfoActivity";
     // 标题栏
     private View title;
     private ImageView titlebar_iv_left;
@@ -76,11 +80,14 @@ public class UserInfoActivity extends BaseActivity implements RadioGroup.OnCheck
     private int curScrollY;
     private StatusAdapter adapter;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
         screenName = getIntent().getStringExtra("screen_name");
+        Log.d(TAG,screenName);
+
         if (TextUtils.isEmpty(screenName)) {
             isCurrentUser = true;
             user = application.currentUser;
@@ -90,6 +97,7 @@ public class UserInfoActivity extends BaseActivity implements RadioGroup.OnCheck
         loadData();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void initView() {
         title = new TitleBuilder(this)
                 .setTitleText("我的")
@@ -135,6 +143,7 @@ public class UserInfoActivity extends BaseActivity implements RadioGroup.OnCheck
         uliv_user_info.setCurrentItemWithoutAnim(1);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void initListView() {
         lv_user_info = (ListView) findViewById(R.id.swipe_target);
         swipeToLoadLayout = (SwipeToLoadLayout) findViewById(R.id.swipeToLoadLayout);
@@ -157,6 +166,36 @@ public class UserInfoActivity extends BaseActivity implements RadioGroup.OnCheck
             public void onLoadMore() {
                 loadStatuses(curPage + 1);
                 swipeToLoadLayout.setLoadingMore(false);
+            }
+        });
+
+
+        //背景图片下拉效果
+
+        lv_user_info.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int l, int t, int oldl, int oldt) {
+                int scrollY = curScrollY = t;
+
+                if (minImageHeight == -1) {
+                    minImageHeight = iv_user_info_head.getHeight();
+                }
+
+                if (maxImageHeight == -1) {
+                    Rect rect = iv_user_info_head.getDrawable().getBounds();
+                    maxImageHeight = rect.bottom - rect.top;
+                }
+
+                if (minImageHeight - scrollY < maxImageHeight) {
+                    iv_user_info_head.layout(0, 0, iv_user_info_head.getWidth(),
+                            minImageHeight - scrollY);
+                } else {
+                    iv_user_info_head.layout(0,
+                            -scrollY - (maxImageHeight - minImageHeight),
+                            iv_user_info_head.getWidth(),
+                            -scrollY - (maxImageHeight - minImageHeight) + iv_user_info_head.getHeight());
+                }
+
             }
         });
 

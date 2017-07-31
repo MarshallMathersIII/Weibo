@@ -16,7 +16,7 @@ import com.bumptech.glide.Glide;
 import com.eminem.weibo.BaseApplication;
 import com.eminem.weibo.BaseFragment;
 import com.eminem.weibo.R;
-import com.eminem.weibo.activity.UserInfoActivity;
+import com.eminem.weibo.activity.NewUserInfoActivity;
 import com.eminem.weibo.adapter.UserItemAdapter;
 import com.eminem.weibo.bean.User;
 import com.eminem.weibo.bean.UserItem;
@@ -163,7 +163,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
             @Override
             public void onClick(View v) {
                 String screen_name = user.getScreen_name();
-                Intent intent = new Intent(activity, UserInfoActivity.class);
+                Intent intent = new Intent(activity,  NewUserInfoActivity.class);
                 intent.putExtra("screen_name",screen_name);
                 startActivity(intent);
             }

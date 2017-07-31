@@ -13,6 +13,7 @@
         />
 
     <ImageView
+        android:src="@mipmap/ic_launcher"
         android:id="@+id/iv_avatar"
         android:layout_width="72dp"
         android:layout_height="72dp" />
@@ -47,8 +48,8 @@
             style="@style/TextViewSubhead"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:text="粉丝"
-            android:textColor="@color/white" />
+            android:text="@string/user_fans_count"
+            android:textColor="@color/black" />
     </LinearLayout>
 
     <LinearLayout

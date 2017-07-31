@@ -37,7 +37,7 @@ import cz.msebera.android.httpclient.Header;
  * Home
  */
 
-public class HomeFragment extends BaseFragment {
+public class WeiboFragment extends BaseFragment {
     private SwipeToLoadLayout swipeToLoadLayout;
     private ListView lvHome;
     private View view;
@@ -55,7 +55,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void initView() {
-        view = View.inflate(activity, R.layout.frag_home, null);
+        view = View.inflate(activity, R.layout.frag_weibo, null);
         swipeToLoadLayout = (SwipeToLoadLayout) view.findViewById(R.id.swipeToLoadLayout);
         lvHome = (ListView) view.findViewById(R.id.swipe_target);
         new TitleBuilder(view)

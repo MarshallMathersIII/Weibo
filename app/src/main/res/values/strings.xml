@@ -2,4 +2,5 @@
     <string name="app_name">Weibo</string>
     <string name="iv_head_name">Eminem</string>
     <string name="iv_head_spec">一万年太久，只争朝夕</string>
+    <string name="user_fans_count">粉丝</string>
 </resources>

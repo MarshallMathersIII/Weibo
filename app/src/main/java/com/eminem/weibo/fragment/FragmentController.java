@@ -33,7 +33,7 @@ public class FragmentController {
 
     private void initFragment() {
         fragments = new ArrayList<>();
-        fragments.add(new HomeFragment());
+        fragments.add(new WeiboFragment());
         fragments.add(new MessageFragment());
         fragments.add(new SearchFragment());
         fragments.add(new UserFragment());
