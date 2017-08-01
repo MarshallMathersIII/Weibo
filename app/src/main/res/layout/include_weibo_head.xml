@@ -17,14 +17,20 @@
         android:id="@+id/rl_content"
         android:layout_width="match_parent"
         android:layout_height="72dp"
-        android:padding="16dp">
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp">
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/orange"
+            android:hint="球球的画"
+            android:textSize="@dimen/txtsize_subhead"
             android:id="@+id/tv_head_name"
-            style="@style/TextViewSubhead"
             android:maxLines="1" />
 
         <TextView
+            android:hint="挣很多很多钱，买很对很对哇哈哈"
             android:id="@+id/tv_head_desc"
             style="@style/TextViewCaption"
             android:layout_alignParentBottom="true"

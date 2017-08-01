@@ -64,7 +64,7 @@ public class StatusGridImgsAdapter extends BaseAdapter {
         holder.iv_image.setLayoutParams(params);
 
         PicUrls urls = datas.get(position);
-        Glide.with(context).load(urls.getBmiddle_pic()).into(holder.iv_image);
+        Glide.with(context).load(urls.getOriginal_pic()).into(holder.iv_image);
         return convertView;
     }
 

@@ -13,13 +13,16 @@
         style="@style/TextViewBody"
         android:layout_width="match_parent"
         android:layout_marginTop="-16dp"
-        android:padding="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
         android:text="从前有个人来到了油坊桥,后来他变成了吴彦祖" />
     <!--9宫格-->
     <include
         android:id="@+id/include_status_image"
         layout="@layout/include_status_image"
-        android:visibility="gone" />
+        android:visibility="visible" />
     <!--转发布局-->
     <include
         layout="@layout/include_retweeted_status"

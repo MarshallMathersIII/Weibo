@@ -27,28 +27,31 @@ public class StringUtils {
         String regexAt = "@[\u4e00-\u9fa5\\w]+";
         String regexTopic = "#[\u4e00-\u9fa5\\w]+#";
         String regexEmoji = "\\[[\u4e00-\u9fa5\\w]+\\]";
+        String regexUrl = "http://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";// url
 
-        String regex = "(" + regexAt + ")|(" + regexTopic + ")|(" + regexEmoji + ")";
+
+        String regex = "(" + regexAt + ")|(" + regexTopic + ")|(" + regexEmoji + ")|(" + regexUrl + ")";
 
         SpannableString spannableString = new SpannableString(source);
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(spannableString);
 
-        if(matcher.find()) {
+        if (matcher.find()) {
             tv.setMovementMethod(LinkMovementMethod.getInstance());
             matcher.reset();
         }
 
-        while(matcher.find()) {
+        while (matcher.find()) {
             final String atStr = matcher.group(1);
             final String topicStr = matcher.group(2);
-            String emojiStr = matcher.group(3);
+            final String emojiStr = matcher.group(3);
+            final String urlStr = matcher.group(4);
 
-            if(atStr != null) {
+            if (atStr != null) {
                 int start = matcher.start(1);
 
-                BoreClickableSpan clickableSpan = new BoreClickableSpan(context) {
+                MyClickableSpan clickableSpan = new MyClickableSpan(context) {
 
                     @Override
                     public void onClick(View widget) {
@@ -59,10 +62,10 @@ public class StringUtils {
                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
-            if(topicStr != null) {
+            if (topicStr != null) {
                 int start = matcher.start(2);
 
-                BoreClickableSpan clickableSpan = new BoreClickableSpan(context) {
+                MyClickableSpan clickableSpan = new MyClickableSpan(context) {
 
                     @Override
                     public void onClick(View widget) {
@@ -73,13 +76,13 @@ public class StringUtils {
                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
-            if(emojiStr != null) {
+            if (emojiStr != null) {
                 int start = matcher.start(3);
 
                 int imgRes = EmotionUtils.getImgByName(emojiStr);
                 Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), imgRes);
 
-                if(bitmap != null) {
+                if (bitmap != null) {
                     int size = (int) tv.getTextSize();
                     bitmap = Bitmap.createScaledBitmap(bitmap, size, size, true);
 
@@ -88,7 +91,19 @@ public class StringUtils {
                             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
             }
+            if (urlStr != null) {
+                int start = matcher.start(4);
 
+                MyClickableSpan clickableSpan = new MyClickableSpan(context) {
+
+                    @Override
+                    public void onClick(View widget) {
+                        ToastUtils.showToast(context, "网址跳转链接: " + urlStr, Toast.LENGTH_SHORT);
+                    }
+                };
+                spannableString.setSpan(clickableSpan, start, start + urlStr.length(),
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
 
 
         }
@@ -97,13 +112,13 @@ public class StringUtils {
         return spannableString;
     }
 
-    static class BoreClickableSpan extends ClickableSpan {
+    static class MyClickableSpan extends ClickableSpan {
 
         private Context context;
 
-        public BoreClickableSpan(Context context) {
+        public MyClickableSpan(Context context) {
             this.context = context;
-       }
+        }
 
         @Override
         public void onClick(View widget) {
