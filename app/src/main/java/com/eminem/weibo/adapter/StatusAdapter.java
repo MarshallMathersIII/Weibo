@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.GridView;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.eminem.weibo.R;
+import com.eminem.weibo.activity.ImageBrowserActivity;
 import com.eminem.weibo.activity.StatusDetailActivity;
 import com.eminem.weibo.activity.WriteCommentActivity;
 import com.eminem.weibo.bean.PicUrls;
@@ -128,28 +130,28 @@ public class StatusAdapter extends BaseAdapter {
         holder.ll_share_bottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.showToast(context,"转发", Toast.LENGTH_LONG);
+                ToastUtils.showToast(context, "转发", Toast.LENGTH_LONG);
             }
         });
         holder.tv_like_bottom.setText(status.getAttitudes_count() == 0 ? "赞" : status.getAttitudes_count() + "");
         holder.ll_like_bottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.showToast(context,"点赞", Toast.LENGTH_LONG);
+                ToastUtils.showToast(context, "点赞", Toast.LENGTH_LONG);
             }
         });
         holder.tv_comment_bottom.setText(status.getComments_count() == 0 ? "评论" : status.getComments_count() + "");
         holder.ll_comment_bottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.showToast(context,"评论", Toast.LENGTH_LONG);
-                if (status.getComments_count()>0){
+                ToastUtils.showToast(context, "评论", Toast.LENGTH_LONG);
+                if (status.getComments_count() > 0) {
                     Intent intent = new Intent(context, StatusDetailActivity.class);
-                    intent.putExtra("status",status);
+                    intent.putExtra("status", status);
                     context.startActivity(intent);
-                }else {
+                } else {
                     Intent intent = new Intent(context, WriteCommentActivity.class);
-                    intent.putExtra("status",status);
+                    intent.putExtra("status", status);
                     context.startActivity(intent);
                 }
 
@@ -169,12 +171,29 @@ public class StatusAdapter extends BaseAdapter {
             iv_image.setVisibility(View.GONE);
             StatusGridImgsAdapter gvAdapter = new StatusGridImgsAdapter(context, pic_urls);
             gv_images.setAdapter(gvAdapter);
+            gv_images.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(context, ImageBrowserActivity.class);
+                    intent.putExtra("status", status);
+                    intent.putExtra("position", position);
+                    context.startActivity(intent);
+                }
+            });
 
         } else if (bmiddle_pic != null) {
             imgContainer.setVisibility(View.VISIBLE);
             gv_images.setVisibility(View.GONE);
             iv_image.setVisibility(View.VISIBLE);
             Glide.with(context).load(bmiddle_pic).into(iv_image);
+            iv_image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ImageBrowserActivity.class);
+                    intent.putExtra("status", status);
+                    context.startActivity(intent);
+                }
+            });
         } else {
             imgContainer.setVisibility(View.GONE);
         }
