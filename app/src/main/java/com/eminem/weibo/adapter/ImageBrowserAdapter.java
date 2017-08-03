@@ -9,20 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.eminem.weibo.R;
 import com.eminem.weibo.bean.PicUrls;
 import com.eminem.weibo.utils.DisplayUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import java.util.ArrayList;
 
+import uk.co.senab.photoview.PhotoView;
 
-
-/**
- * Created by logo on 2016/6/2.
- */
 public class ImageBrowserAdapter extends PagerAdapter {
 
     private Activity context;
@@ -30,6 +28,7 @@ public class ImageBrowserAdapter extends PagerAdapter {
     private ArrayList<View> picViews;
 
     private ImageLoader mImageLoader;
+
     public ImageBrowserAdapter(Activity context, ArrayList<PicUrls> picUrls) {
         this.context = context;
         this.picUrls = picUrls;
@@ -40,7 +39,7 @@ public class ImageBrowserAdapter extends PagerAdapter {
     private void initImgs() {
         picViews = new ArrayList<View>();
 
-        for(int i=0; i<picUrls.size(); i++) {
+        for (int i = 0; i < picUrls.size(); i++) {
             // 填充显示图片的页面布局
             View view = View.inflate(context, R.layout.item_image_browser, null);
             picViews.add(view);
@@ -49,7 +48,7 @@ public class ImageBrowserAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        if(picUrls.size() > 1) {
+        if (picUrls.size() > 1) {
             return Integer.MAX_VALUE;
         }
         return picUrls.size();
@@ -61,59 +60,41 @@ public class ImageBrowserAdapter extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(final ViewGroup container, int position) {
         int index = position % picUrls.size();
         View view = picViews.get(index);
-        final ImageView iv_image_browser = (ImageView) view.findViewById(R.id.iv_image_browser);
+        final PhotoView iv_image_browser = (PhotoView) view.findViewById(R.id.iv_image_browser);
         PicUrls picUrl = picUrls.get(index);
-
-//        String url = picUrl.isShowOriImag() ? picUrl.getOriginal_pic() : picUrl.getBmiddle_pic();
-        String url =  picUrl.getOriginal_pic();
-
+//      String url = picUrl.isShowOriImag() ? picUrl.getOriginal_pic() : picUrl.getBmiddle_pic();
+        String url = picUrl.getOriginal_pic();
 
 
-        mImageLoader.loadImage(url, new ImageLoadingListener() {
+        Glide.with(context)
+                .load(url)
+                .asBitmap()
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
 
-            @Override
-            public void onLoadingStarted(String imageUri, View view) {
-                // TODO Auto-generated method stub
+                        float scale = (float) resource.getHeight() / resource.getWidth();
+                        int screenWidthPixels = DisplayUtils.getScreenWidthPixels(context);
+                        int screenHeightPixels = DisplayUtils.getScreenHeightPixels(context);
+                        int height = (int) (screenWidthPixels * scale);
 
-            }
+                        if (height < screenHeightPixels) {
+                            height = screenHeightPixels;
+                        }
 
-            @Override
-            public void onLoadingFailed(String imageUri, View view,
-                                        FailReason failReason) {
-                // TODO Auto-generated method stub
+                        ViewGroup.LayoutParams params = iv_image_browser.getLayoutParams();
+                        params.height = height;
+                        params.width = screenWidthPixels;
 
-            }
-
-            @Override
-            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                float scale = (float) loadedImage.getHeight() / loadedImage.getWidth();
-
-                int screenWidthPixels = DisplayUtils.getScreenWidthPixels(context);
-                int screenHeightPixels = DisplayUtils.getScreenHeightPixels(context);
-                int height = (int) (screenWidthPixels * scale);
-
-                if (height < screenHeightPixels) {
-                    height = screenHeightPixels;
-                }
-
-                ViewGroup.LayoutParams params = iv_image_browser.getLayoutParams();
-                params.height = height;
-                params.width = screenWidthPixels;
-
-                iv_image_browser.setImageBitmap(loadedImage);
-            }
-
-            @Override
-            public void onLoadingCancelled(String imageUri, View view) {
-                // TODO Auto-generated method stub
-
-            }
-        });
+                        iv_image_browser.setImageBitmap(resource);
+                    }
+                });
 
         container.addView(view);
+
         return view;
     }
 
@@ -136,7 +117,7 @@ public class ImageBrowserAdapter extends PagerAdapter {
         View view = picViews.get(position % picViews.size());
         ImageView iv_image_browser = (ImageView) view.findViewById(R.id.iv_image_browser);
         Drawable drawable = iv_image_browser.getDrawable();
-        if(drawable != null && drawable instanceof BitmapDrawable) {
+        if (drawable != null && drawable instanceof BitmapDrawable) {
             BitmapDrawable bd = (BitmapDrawable) drawable;
             bitmap = bd.getBitmap();
         }

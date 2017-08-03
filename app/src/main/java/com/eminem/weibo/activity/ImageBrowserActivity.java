@@ -44,6 +44,14 @@ public class ImageBrowserActivity extends BaseActivity {
         setData();
     }
 
+    private void initData() {
+        status = (Status) getIntent().getSerializableExtra("status");
+        position = getIntent().getIntExtra("position", 0);
+        // 获取图片数据集合(单图也有对应的集合,集合的size为1)
+        imgUrls = status.getPic_urls();
+
+    }
+
     private void setData() {
         adapter = new ImageBrowserAdapter(this, imgUrls);
         vpImageBrower.setAdapter(adapter);
@@ -88,11 +96,5 @@ public class ImageBrowserActivity extends BaseActivity {
     }
 
 
-    private void initData() {
-        status = (Status) getIntent().getSerializableExtra("status");
-        position = getIntent().getIntExtra("position", 0);
-        // 获取图片数据集合(单图也有对应的集合,集合的size为1)
-        imgUrls = status.getPic_urls();
 
-    }
 }
