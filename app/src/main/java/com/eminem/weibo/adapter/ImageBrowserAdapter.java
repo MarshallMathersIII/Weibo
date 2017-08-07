@@ -15,7 +15,6 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.eminem.weibo.R;
 import com.eminem.weibo.bean.PicUrls;
 import com.eminem.weibo.utils.DisplayUtils;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 
@@ -26,13 +25,9 @@ public class ImageBrowserAdapter extends PagerAdapter {
     private Activity context;
     private ArrayList<PicUrls> picUrls;
     private ArrayList<View> picViews;
-
-    private ImageLoader mImageLoader;
-
     public ImageBrowserAdapter(Activity context, ArrayList<PicUrls> picUrls) {
         this.context = context;
         this.picUrls = picUrls;
-        this.mImageLoader = ImageLoader.getInstance();
         initImgs();
     }
 
@@ -68,7 +63,6 @@ public class ImageBrowserAdapter extends PagerAdapter {
 //      String url = picUrl.isShowOriImag() ? picUrl.getOriginal_pic() : picUrl.getBmiddle_pic();
         String url = picUrl.getOriginal_pic();
 
-
         Glide.with(context)
                 .load(url)
                 .asBitmap()
@@ -92,9 +86,7 @@ public class ImageBrowserAdapter extends PagerAdapter {
                         iv_image_browser.setImageBitmap(resource);
                     }
                 });
-
         container.addView(view);
-
         return view;
     }
 
@@ -121,7 +113,6 @@ public class ImageBrowserAdapter extends PagerAdapter {
             BitmapDrawable bd = (BitmapDrawable) drawable;
             bitmap = bd.getBitmap();
         }
-
         return bitmap;
     }
 

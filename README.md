@@ -10,11 +10,12 @@
 - [正则表达式](https://mp.weixin.qq.com/s?__biz=MzIxOTI1NTk5Nw==&mid=2650047537&idx=1&sn=59b3d01944fcc6dc5c98c695f36f8bed&scene=19#wechat_redirect)
 
 ## 图片浏览功能
-- 功能点: 图片浏览（包括长图浏览、GIF），双击缩放操作，保存本地功能
+- 功能点: 图片浏览（包括长图浏览、GIF），双击缩放操作，保存本地功能，图片加载百分比,BottomDialog
 - 知识点：ViewPager Universalimageloader  PhotoView Glide
 #### 参考
 - [Glide框架源码解析及使用](http://blog.csdn.net/guolin_blog/article/details/53759439)
 - [Glide使用说明](http://blog.csdn.net/xiehuimx/article/details/52349317)
 - [微博加载长图](https://juejin.im/entry/5811bb1f67f3560057d7ac01)
+- [BottomDialog](https://github.com/shaohui10086/BottomDialog/blob/master/README_ZH.md)
 
 

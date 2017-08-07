@@ -23,7 +23,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:singleLine">true</item>
         <item name="android:textColor">@color/txt_black</item>
-        <item name="android:textSize">@dimen/txtsize_headline</item>
+        <item name="android:textSize">@dimen/txtsize_title</item>
     </style>
     <!--底部tab stytle-->
     <style name="RadioButtonBottomTab">
