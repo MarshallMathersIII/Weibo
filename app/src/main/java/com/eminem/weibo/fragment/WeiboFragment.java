@@ -47,9 +47,8 @@ public class WeiboFragment extends BaseFragment {
     private StatusAdapter adapter;
     private List<Status> statuses = new ArrayList<>();
     private int curPage = 1;
-    private RadioButton radioButton;
-
     private GestureDetector gestureDetector;
+    private View view_search;
 
     @Nullable
     @Override
@@ -61,6 +60,7 @@ public class WeiboFragment extends BaseFragment {
     }
 
     private void initView() {
+        view_search=View.inflate(getContext(),R.layout.include_searchview,null);
         view = View.inflate(activity, R.layout.frag_weibo, null);
         swipeToLoadLayout = (SwipeToLoadLayout) view.findViewById(R.id.swipeToLoadLayout);
         lvHome = (ListView) view.findViewById(R.id.swipe_target);
@@ -71,7 +71,7 @@ public class WeiboFragment extends BaseFragment {
                 .setRightOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ToastUtils.showToast(activity,"扫一扫",Toast.LENGTH_LONG);
+                        ToastUtils.showToast(activity, "扫一扫", Toast.LENGTH_LONG);
                     }
                 })
                 .setLeftOnClickListener(new View.OnClickListener() {
@@ -82,6 +82,7 @@ public class WeiboFragment extends BaseFragment {
                 });
 
 
+        lvHome.addHeaderView(view_search);
         adapter = new StatusAdapter(activity, statuses);
         lvHome.setAdapter(adapter);
         swipeToLoadLayout.setOnRefreshListener(new OnRefreshListener() {
@@ -101,20 +102,19 @@ public class WeiboFragment extends BaseFragment {
             }
         });
 
-      RadioButton radioButton= (RadioButton) getActivity().findViewById(R.id.rb_home);
+        //双击事件处理
+        RadioButton radioButton = (RadioButton) getActivity().findViewById(R.id.rb_home);
         radioButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
                 return gestureDetector.onTouchEvent(event);
-
-
             }
         });
-         gestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
+        gestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onDoubleTap(MotionEvent e) {
-                ToastUtils.showToast(getActivity(),"双击事件",Toast.LENGTH_LONG);
+                ToastUtils.showToast(getActivity(), "双击事件", Toast.LENGTH_LONG);
                 lvHome.setSelection(0);
                 swipeToLoadLayout.setOnRefreshListener(new OnRefreshListener() {
                     @Override

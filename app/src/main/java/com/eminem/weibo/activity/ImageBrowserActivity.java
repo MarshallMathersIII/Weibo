@@ -14,6 +14,7 @@ import com.eminem.weibo.R;
 import com.eminem.weibo.adapter.ImageBrowserAdapter;
 import com.eminem.weibo.bean.PicUrls;
 import com.eminem.weibo.bean.Status;
+import com.eminem.weibo.utils.AppManager;
 import com.eminem.weibo.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -53,6 +54,8 @@ public class ImageBrowserActivity extends BaseActivity implements View.OnClickLi
         ButterKnife.bind(this);
         initData();
         setData();
+        AppManager.addActivity(this);
+
     }
 
 
@@ -166,5 +169,10 @@ public class ImageBrowserActivity extends BaseActivity implements View.OnClickLi
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AppManager.finishActivity(this);
 
+    }
 }

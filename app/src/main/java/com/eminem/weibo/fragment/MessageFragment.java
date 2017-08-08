@@ -14,6 +14,7 @@ import com.eminem.weibo.utils.ToastUtils;
 
 /**
  * Created by Eminem on 2016/11/30.
+ *
  */
 
 public class MessageFragment extends BaseFragment {
@@ -23,14 +24,23 @@ public class MessageFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view= View.inflate(activity,R.layout.frag_message,null);
         new TitleBuilder(view)
-                .setTitleText("首页")
-                .setLeftText("LEFT")
+                .setTitleText("消息")
+                .setLeftText("发现群")
+                .setRightImage(R.drawable.title_message_icon)
+                .setRightOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtils.showToast(activity, "click", Toast.LENGTH_SHORT);
+                    }
+                })
                 .setLeftOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ToastUtils.showToast(activity, "left onclick", Toast.LENGTH_SHORT);
+                        ToastUtils.showToast(activity, "发现群", Toast.LENGTH_SHORT);
                     }
                 });
+
+
         return view;
     }
 }

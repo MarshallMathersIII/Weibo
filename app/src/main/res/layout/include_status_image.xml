@@ -9,8 +9,7 @@
 
     <com.eminem.weibo.widget.WrapHeightGridView
         android:id="@+id/gv_images"
-        style="@style/GridViewImages"
-        android:layout_width="272dp"/>
+        style="@style/GridViewImages" />
 
     <ImageView
         android:id="@+id/iv_image"
