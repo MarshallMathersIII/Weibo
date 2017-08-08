@@ -32,8 +32,7 @@
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:layout_gravity="center_vertical"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher" />
+                    android:scaleType="centerCrop" />
 
                 <RelativeLayout
                     android:id="@+id/rl_content"

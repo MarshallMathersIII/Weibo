@@ -104,7 +104,7 @@ public class NewUserInfoActivity extends AppCompatActivity {
             return;
         }
         tv_user_name.setText(user.getName());
-        Glide.with(this).load(user.getAvatar_hd()).bitmapTransform(new CropCircleTransformation(this)).into(iv_user_head);
+        Glide.with(this).load(user.getAvatar_hd()).bitmapTransform(new CropCircleTransformation(this)).placeholder(R.drawable.head_pistion).into(iv_user_head);
         tv_user_fans.setText("关注  " + user.getFriends_count() + " | " + "粉丝  " + user.getFollowers_count());
         tv_user_desc.setText("简介:" + user.getDescription());
     }

@@ -32,7 +32,7 @@
             android:id="@+id/rb_home"
             style="@style/RadioButtonBottomTab"
             android:drawableTop="@drawable/icon_home"
-            android:text="首页" />
+            android:text="微博" />
 
         <RadioButton
             android:id="@+id/rb_message"
@@ -59,6 +59,6 @@
             android:id="@+id/rb_user"
             style="@style/RadioButtonBottomTab"
             android:drawableTop="@drawable/icon_my"
-            android:text="我的" />
+            android:text="我" />
     </RadioGroup>
 </LinearLayout>

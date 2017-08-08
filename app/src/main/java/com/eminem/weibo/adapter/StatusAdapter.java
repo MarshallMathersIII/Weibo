@@ -102,7 +102,7 @@ public class StatusAdapter extends BaseAdapter {
         //微博用户
         final Status status = (Status) getItem(position);
         final User user = status.getUser();
-        Glide.with(context).load(user.getAvatar_hd()).bitmapTransform(new CropCircleTransformation(context)).into(holder.iv_head);
+        Glide.with(context).load(user.getAvatar_hd()).bitmapTransform(new CropCircleTransformation(context)).placeholder(R.drawable.head_pistion).into(holder.iv_head);
         holder.tv_head_name.setText(user.getName());
         if (status.getSource().isEmpty()) {
             holder.tv_head_desc.setText(DateUtils.getShortTime(status.getCreated_at()));
@@ -185,7 +185,7 @@ public class StatusAdapter extends BaseAdapter {
             imgContainer.setVisibility(View.VISIBLE);
             gv_images.setVisibility(View.GONE);
             iv_image.setVisibility(View.VISIBLE);
-            Glide.with(context).load(bmiddle_pic).into(iv_image);
+            Glide.with(context).load(bmiddle_pic).placeholder(R.drawable.pic_postion).into(iv_image);
             iv_image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

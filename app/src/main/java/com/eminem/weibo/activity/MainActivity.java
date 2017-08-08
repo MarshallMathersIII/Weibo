@@ -45,6 +45,7 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
         controller=FragmentController.getInstance(this,R.id.fl_content);
         controller.showFragment(0);
+        rg.check(R.id.rb_home);
     }
 
 

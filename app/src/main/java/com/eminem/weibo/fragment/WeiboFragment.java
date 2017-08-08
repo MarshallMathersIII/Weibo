@@ -2,10 +2,13 @@ package com.eminem.weibo.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
@@ -14,10 +17,10 @@ import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.eminem.weibo.BaseFragment;
 import com.eminem.weibo.R;
 import com.eminem.weibo.adapter.StatusAdapter;
-import com.eminem.weibo.utils.AsyncHttpUtils;
 import com.eminem.weibo.bean.Status;
 import com.eminem.weibo.bean.StatusTimeLineResponse;
 import com.eminem.weibo.constants.AccessTokenKeeper;
+import com.eminem.weibo.utils.AsyncHttpUtils;
 import com.eminem.weibo.utils.TitleBuilder;
 import com.eminem.weibo.utils.ToastUtils;
 import com.google.gson.Gson;
@@ -44,6 +47,9 @@ public class WeiboFragment extends BaseFragment {
     private StatusAdapter adapter;
     private List<Status> statuses = new ArrayList<>();
     private int curPage = 1;
+    private RadioButton radioButton;
+
+    private GestureDetector gestureDetector;
 
     @Nullable
     @Override
@@ -59,12 +65,19 @@ public class WeiboFragment extends BaseFragment {
         swipeToLoadLayout = (SwipeToLoadLayout) view.findViewById(R.id.swipeToLoadLayout);
         lvHome = (ListView) view.findViewById(R.id.swipe_target);
         new TitleBuilder(view)
+                .setLeftImage(R.drawable.title_camre)
+                .setRightImage(R.drawable.title_sacn)
                 .setTitleText("首页")
-                .setLeftText("LEFT")
+                .setRightOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtils.showToast(activity,"扫一扫",Toast.LENGTH_LONG);
+                    }
+                })
                 .setLeftOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ToastUtils.showToast(activity, "left onclick", Toast.LENGTH_SHORT);
+                        ToastUtils.showToast(activity, "相机", Toast.LENGTH_SHORT);
                     }
                 });
 
@@ -87,6 +100,34 @@ public class WeiboFragment extends BaseFragment {
                 swipeToLoadLayout.setLoadingMore(false);
             }
         });
+
+      RadioButton radioButton= (RadioButton) getActivity().findViewById(R.id.rb_home);
+        radioButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                return gestureDetector.onTouchEvent(event);
+
+
+            }
+        });
+         gestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onDoubleTap(MotionEvent e) {
+                ToastUtils.showToast(getActivity(),"双击事件",Toast.LENGTH_LONG);
+                lvHome.setSelection(0);
+                swipeToLoadLayout.setOnRefreshListener(new OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        initData(1);
+                        swipeToLoadLayout.setRefreshing(false);
+
+                    }
+                });
+                return super.onDoubleTap(e);
+            }
+        });
+
 
     }
 
