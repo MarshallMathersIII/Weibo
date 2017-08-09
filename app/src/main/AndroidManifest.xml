@@ -40,7 +40,8 @@
         <activity android:name=".activity.NewUserInfoActivity" />
         <activity android:name=".activity.MagicLoginActivity" />
         <activity android:name=".activity.UnLoginActivity" />
-        <activity android:name=".activity.ImageBrowserActivity"></activity>
+        <activity android:name=".activity.ImageBrowserActivity" />
+        <activity android:name=".activity.MessageDetailsActivity"></activity>
     </application>
 
 </manifest>

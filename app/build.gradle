@@ -47,18 +47,10 @@ dependencies {
     compile 'jp.wasabeef:glide-transformations:2.0.2'
     compile 'com.android.support:design:25.3.1'
     compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile 'com.github.chrisbanes:PhotoView:1.2.6'
+    compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.5.0'
+    compile 'me.shaohui:bottomdialog:1.1.9'
+    compile 'com.githang:android-crash:1.0'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
-    //compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
-    compile 'com.github.chrisbanes:PhotoView:1.2.6'
-    //加载长图
-    compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.5.0'
-    //bottomdialog
-    compile 'me.shaohui:bottomdialog:1.1.9'
-    //crash异常处理框架
-    compile 'com.githang:android-crash:1.0'
-
-
-
-
 }
