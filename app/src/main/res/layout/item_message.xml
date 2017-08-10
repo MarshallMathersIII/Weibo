@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/ll_message_item"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_weibo_head" />
+
+    <TextView
+        android:id="@+id/tv_message"
+        style="@style/TextViewBody"
+        android:layout_width="match_parent"
+        android:layout_marginTop="-16dp"
+        android:paddingBottom="8dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:text="从前有个人来到了油坊桥,后来他变成了吴彦祖" />
+
+    <include layout="@layout/include_message_details" />
+
+    <include
+        layout="@layout/include_message_retweeted"
+        android:visibility="gone" />
+
+</LinearLayout>

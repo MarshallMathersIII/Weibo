@@ -5,7 +5,6 @@
     android:orientation="vertical">
 
     <include layout="@layout/include_titlebar" />
-    <!--<include layout="@layout/include_searchview"/>-->
 
     <com.aspsine.swipetoloadlayout.SwipeToLoadLayout
         android:id="@+id/swipeToLoadLayout"

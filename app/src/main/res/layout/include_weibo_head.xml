@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_card_content"
     android:layout_width="match_parent"
     android:layout_height="72dp"
-    android:id="@+id/ll_card_content"
     android:orientation="horizontal">
 
     <ImageView
@@ -15,27 +15,47 @@
 
     <RelativeLayout
         android:id="@+id/rl_content"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="72dp"
+        android:layout_weight="1"
         android:paddingBottom="16dp"
         android:paddingTop="16dp">
 
         <TextView
+            android:id="@+id/tv_head_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/orange"
             android:hint="球球的画"
-            android:textSize="@dimen/txtsize_subhead"
-            android:id="@+id/tv_head_name"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:textColor="@color/orange"
+            android:textSize="@dimen/txtsize_subhead" />
 
         <TextView
-            android:hint="挣很多很多钱，买很对很对哇哈哈"
             android:id="@+id/tv_head_desc"
             style="@style/TextViewCaption"
             android:layout_alignParentBottom="true"
+            android:hint="挣很多很多钱，买很对很对哇哈哈"
             android:maxLines="1"
             android:textColor="@color/txt_gray" />
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_more"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_margin="16dp"
+        android:baselineAlignBottom="true"
+        android:src="@drawable/message_more1"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/iv_reply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:baselineAlignBottom="true"
+        android:src="@drawable/message_more1"
+        android:text="回复"
+        android:visibility="gone" />
 
 </LinearLayout>

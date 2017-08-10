@@ -2,6 +2,7 @@ package com.eminem.weibo.bean;
 
 /**
  * Created by eminem on 2017/6/6.
+ * comments/mentions
  */
 
 public class Comment extends BaseBean {

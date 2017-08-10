@@ -60,7 +60,7 @@ public class WeiboFragment extends BaseFragment {
     }
 
     private void initView() {
-        view_search=View.inflate(getContext(),R.layout.include_searchview,null);
+        view_search = View.inflate(getContext(), R.layout.include_searchview, null);
         view = View.inflate(activity, R.layout.frag_weibo, null);
         swipeToLoadLayout = (SwipeToLoadLayout) view.findViewById(R.id.swipeToLoadLayout);
         lvHome = (ListView) view.findViewById(R.id.swipe_target);
