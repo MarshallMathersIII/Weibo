@@ -17,6 +17,7 @@ import com.eminem.weibo.BaseApplication;
 import com.eminem.weibo.BaseFragment;
 import com.eminem.weibo.R;
 import com.eminem.weibo.activity.NewUserInfoActivity;
+import com.eminem.weibo.activity.SettingActivity;
 import com.eminem.weibo.adapter.UserItemAdapter;
 import com.eminem.weibo.bean.User;
 import com.eminem.weibo.bean.UserItem;
@@ -42,7 +43,7 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
  * Created by Eminem on 2016/11/30.
  */
 
-public class UserFragment extends BaseFragment implements View.OnClickListener {
+public class UserFragment extends BaseFragment {
 
     private LinearLayout ll_userinfo;
 
@@ -93,13 +94,13 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
             AsyncHttpUtils.get("users/show.json", params, new TextHttpResponseHandler() {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                    Log.d("usershow",responseString);
+                    Log.d("usershow", responseString);
                 }
 
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String responseString) {
                     ToastUtils.showToast(activity, "onSuccess", Toast.LENGTH_SHORT);
-                    Log.d("usershow",responseString);
+                    Log.d("usershow", responseString);
                     BaseApplication application = (BaseApplication) activity.getApplication();
                     application.currentUser = new Gson().fromJson(responseString, User.class);
                     setUserInfo();
@@ -115,8 +116,20 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
                 .setTitleText("我")
                 .setLeftText("添加好友")
                 .setRightText("设置")
-                .setRightOnClickListener(this)
-                .setLeftOnClickListener(this);
+                .setRightOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        intent2Activity(SettingActivity.class);
+
+                    }
+                })
+                .setLeftOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtils.showToast(getActivity(),"添加好友",Toast.LENGTH_LONG);
+
+                    }
+                });
         tv_status_count = (TextView) view.findViewById(R.id.tv_status_count);
         tv_follow_count = (TextView) view.findViewById(R.id.tv_follow_count);
         tv_fans_count = (TextView) view.findViewById(R.id.tv_fans_count);
@@ -145,9 +158,9 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void setUserInfo() {
-        user = ((BaseApplication)activity.getApplication()).currentUser;
+        user = ((BaseApplication) activity.getApplication()).currentUser;
 
-        if(user == null) {
+        if (user == null) {
             return;
         }
 
@@ -163,23 +176,13 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
             @Override
             public void onClick(View v) {
                 String screen_name = user.getScreen_name();
-                Intent intent = new Intent(activity,  NewUserInfoActivity.class);
-                intent.putExtra("screen_name",screen_name);
+                Intent intent = new Intent(activity, NewUserInfoActivity.class);
+                intent.putExtra("screen_name", screen_name);
                 startActivity(intent);
             }
         });
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.titlebar_iv_left:
-                break;
-            case R.id.titlebar_iv_right:
-                break;
-        }
-
-    }
 
     @Override
     public void onDestroyView() {

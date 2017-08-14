@@ -41,7 +41,8 @@
         <activity android:name=".activity.MagicLoginActivity" />
         <activity android:name=".activity.UnLoginActivity" />
         <activity android:name=".activity.ImageBrowserActivity" />
-        <activity android:name=".activity.MessageDetailsActivity"></activity>
+        <activity android:name=".activity.MessageDetailsActivity" />
+        <activity android:name=".activity.SettingActivity"></activity>
     </application>
 
 </manifest>
