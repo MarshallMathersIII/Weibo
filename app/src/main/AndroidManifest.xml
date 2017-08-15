@@ -42,7 +42,8 @@
         <activity android:name=".activity.UnLoginActivity" />
         <activity android:name=".activity.ImageBrowserActivity" />
         <activity android:name=".activity.MessageDetailsActivity" />
-        <activity android:name=".activity.SettingActivity"></activity>
+        <activity android:name=".activity.SettingActivity" />
+        <activity android:name=".activity.AddActivity"></activity>
     </application>
 
 </manifest>

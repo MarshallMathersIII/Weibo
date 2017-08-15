@@ -6,12 +6,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.eminem.weibo.BaseActivity;
 import com.eminem.weibo.R;
 import com.eminem.weibo.fragment.FragmentController;
-
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,11 +41,10 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        controller=FragmentController.getInstance(this,R.id.fl_content);
+        controller = FragmentController.getInstance(this, R.id.fl_content);
         controller.showFragment(0);
         rg.check(R.id.rb_home);
     }
-
 
 
     @OnClick({R.id.rb_home, R.id.rb_message, R.id.iv_add, R.id.rb_serach, R.id.rb_user})
@@ -60,7 +57,7 @@ public class MainActivity extends BaseActivity {
                 controller.showFragment(1);
                 break;
             case R.id.iv_add:
-                Toast.makeText(this,"bilibili",Toast.LENGTH_SHORT).show();
+                intent2Activity(AddActivity.class);
                 break;
             case R.id.rb_serach:
                 controller.showFragment(2);
