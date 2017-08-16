@@ -17,5 +17,7 @@
 - [Glide使用说明](http://blog.csdn.net/xiehuimx/article/details/52349317)
 - [微博加载长图](https://juejin.im/entry/5811bb1f67f3560057d7ac01)
 - [BottomDialog](https://github.com/shaohui10086/BottomDialog/blob/master/README_ZH.md)
-
+## 开源项目
+- [图片轮播](https://github.com/youth5201314/banner)
+- [Viewger指示器CircleIndicator](https://github.com/ongakuer/CircleIndicator)
 
