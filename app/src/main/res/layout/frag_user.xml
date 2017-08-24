@@ -43,15 +43,13 @@
 
                     <TextView
                         android:id="@+id/tv_subhead"
-                        style="@style/TextViewSubhead"
-                        android:text="吴彦祖" />
+                        style="@style/TextViewSubhead" />
 
                     <TextView
                         android:id="@+id/tv_caption"
                         style="@style/TextViewCaption"
                         android:layout_below="@id/tv_subhead"
                         android:layout_marginTop="8dp"
-                        android:text="没错,我就是油坊桥吴彦祖"
                         android:textColor="@color/txt_gray" />
 
                     <ImageView

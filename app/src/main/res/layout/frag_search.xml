@@ -4,11 +4,92 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/include_searchview" />
+    <include
+        android:id="@+id/search_view"
+        layout="@layout/include_searchview" />
 
     <com.youth.banner.Banner
         android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:background="@color/bg_gray" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20px"
+        android:background="@color/divider_gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/d_bizui"
+            android:gravity="center_vertical"
+            android:paddingStart="10dp"
+            android:text="emienm" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/bg_gray" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/d_bizui"
+            android:gravity="center_vertical"
+            android:paddingStart="10dp"
+            android:text="#emienm#" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5px"
+        android:background="@color/divider_gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/d_bizui"
+            android:gravity="center_vertical"
+            android:paddingStart="10dp"
+            android:text="emienm" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/bg_gray" />
+
+        <TextView
+            android:layout_width="0dp"
+
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/d_bizui"
+            android:gravity="center_vertical"
+            android:paddingStart="10dp"
+            android:text="emienm" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20px"
+        android:background="@color/divider_gray" />
+
+
 </LinearLayout>
